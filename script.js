@@ -9,15 +9,15 @@ const handleSearch = () => {
   // console.log(keyword);
   fetch(url)
     .then(res => res.json())
-    .then(data => showArtists(data.artists));
+    .then(data => showArtists(data?.artists));
 };
 
 const showArtists = (data) => {
   console.log(data);
 
-  const artistContainer = document.getElementById("artist");
+  const artistContainer = document.getElementById("artists");
 
-  data.forEach(artist => {
+  data?.forEach(artist => {
 
     const div = document.createElement("div");
 
@@ -47,13 +47,15 @@ const showArtists = (data) => {
 
 };
 
-
+/// https://theaudiodb.com/api/v1/json/2/album.php?i=120796
 
 const fetchAlbums = (id) => {
-  const url = `theaudiodb.com/api/v1/json/2/album.php?i=${id}`;
+  console.log(id);
+  const url = `https://theaudiodb.com/api/v1/json/2/album.php?i=${id}`;
+  console.log(url)
   fetch(url)
-    .then((res) => res.JSON())
-    .then((data) => showAlbum(data));
+    .then(res => res.json())
+    .then(data => showAlbum(data));
   const artistContainer = elementById("artists");
   artistContainer.innerHTML = "";
 };
