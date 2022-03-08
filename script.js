@@ -4,20 +4,25 @@ const elementById = (id) => {
 
 const handleSearch = () => {
   const keyword = document.getElementById("keyword");
-  console.log(keyword.value)
+  // console.log(keyword.value)
   const url = `https://theaudiodb.com/api/v1/json/2/search.php?s=${keyword.value}`;
-  console.log(keyword);
-
+  // console.log(keyword);
   fetch(url)
     .then(res => res.json())
-    .then(data => showArtists(data));
+    .then(data => showArtists(data.artists));
 };
 
 const showArtists = (data) => {
-  const artistContainer = elementById("artist");
-  data?.artists?.forEach((artist) => {
+  console.log(data);
+
+  const artistContainer = document.getElementById("artist");
+
+  data.forEach(artist => {
+
     const div = document.createElement("div");
+
     div.classList.add("artist-card");
+
     div.innerHTML = `<div class="image-container">
     <div class="image-container-inner">
       <img
@@ -35,9 +40,14 @@ const showArtists = (data) => {
     <i class="fa-solid fa-compact-disc"></i>
     <p onclick="fetchAlbums('${artist.idArtist}')" class="button-title">Albums</p>
   </button>`;
+
     artistContainer.appendChild(div);
+
   });
+
 };
+
+
 
 const fetchAlbums = (id) => {
   const url = `theaudiodb.com/api/v1/json/2/album.php?i=${id}`;
