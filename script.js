@@ -3,11 +3,14 @@ const elementById = (id) => {
 };
 
 const handleSearch = () => {
-  const keyword = elementById("keyword");
+  const keyword = document.getElementById("keyword");
+  console.log(keyword.value)
   const url = `https://theaudiodb.com/api/v1/json/2/search.php?s=${keyword.value}`;
+  console.log(keyword);
+
   fetch(url)
-    .then((res) => res.json())
-    .then((data) => showArtists(data));
+    .then(res => res.json())
+    .then(data => showArtists(data));
 };
 
 const showArtists = (data) => {
